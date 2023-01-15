@@ -7,11 +7,13 @@ local DrawComponent = require("components/DrawComponent")
 local PlayerComponent = require("components/PlayerComponent")
 local VelocityComponent = require("components/VelocityComponent")
 local SpawnerComponent = require("components/SpawnerComponent")
+local SpeedComponent = require("components/SpeedComponent")
 
 local DrawSystem = require("systems/DrawSystem")
 local MovementSystem = require("systems/MovementSystem")
 local PlayerControlSystem = require("systems/PlayerControlSystem")
 local SpawnerSystem = require("systems/SpawnerSystem")
+local MaxSpeedSystem = require("systems/MaxSpeedSystem")
 
 local SpawnCarHandler = require("commands/spawnCarHandler")
 
@@ -34,6 +36,7 @@ function PlayScene:new()
   local positionComponent3 = PositionComponent:new(200, 200)
   local playerComponent = PlayerComponent:new()
   local velocityComponent = VelocityComponent:new()
+  local speedComponent = SpeedComponent:new(2)
 
   local entity1 = Entity:new()
   local entity2 = Entity:new()
@@ -50,6 +53,7 @@ function PlayScene:new()
   ));
 
   playerEntity:addComponent(ComponentTypes.Player, playerComponent)
+  playerEntity:addComponent(ComponentTypes.Speed, speedComponent)
   playerEntity:addComponent(ComponentTypes.Velocity, velocityComponent)
   playerEntity:addComponent(ComponentTypes.Position, positionComponent3)
   playerEntity:addComponent(ComponentTypes.Draw, DrawComponent:new(
@@ -76,11 +80,13 @@ function PlayScene:new()
   local playerControlSystem = PlayerControlSystem:new()
   local movementSystem = MovementSystem:new()
   local spawnerSystem = SpawnerSystem:new()
+  local maxSpeedSystem = MaxSpeedSystem:new()
 
   self.ecs:addSystem(drawSystem)
   self.ecs:addSystem(movementSystem)
   self.ecs:addSystem(playerControlSystem)
   self.ecs:addSystem(spawnerSystem)
+  self.ecs:addSystem(maxSpeedSystem)
 
   return self
 end
@@ -91,7 +97,14 @@ function PlayScene:draw()
 end
 
 function PlayScene:update(dt)
-  self.map:update(dt)
+  local players = self.ecs:getEntities({ ComponentTypes.Player })
+  local player
+  for p, _ in pairs(players) do
+    player = p
+    break
+  end
+
+  self.map:update(dt, player)
   self.ecs:update(dt)
 end
 

@@ -19,7 +19,7 @@ function SpawnerSystem:update(_, ecs)
     local spawnerComponent = entity:getComponent(ComponentTypes.Spawner)
     spawnerComponent.counter = spawnerComponent.counter + 1
 
-    if spawnerComponent.counter > 100 then
+    if spawnerComponent.counter > 1000 then
       spawnerComponent.counter = 0
       ecs:dispatch(SpawnCarCommand:new(CarTypes.BlueCar1, 200, 220))
     end

@@ -3,6 +3,7 @@ ComponentTypes = {
   ["Position"] = "POSITION",
   ["Player"] = "PLAYER",
   ["Velocity"] = "VELOCITY",
+  ["Speed"] = "SPEED",
   ["Spawner"] = "SPAWNER"
 }
 

@@ -7,7 +7,11 @@ function PlayerControlSystem:new()
   self = setmetatable({}, PlayerControlSystem)
 
   self.entitiesMetadata = {}
-  self.entitiesMetadata["entities"] = {ComponentTypes.Velocity, ComponentTypes.Player}
+  self.entitiesMetadata["entities"] = {
+    ComponentTypes.Velocity,
+    ComponentTypes.Player,
+    ComponentTypes.Speed
+  }
 
   return self
 end
@@ -15,6 +19,7 @@ end
 function PlayerControlSystem:update()
   for entity, _ in pairs(self.entities) do
     local acc = entity:getComponent(ComponentTypes.Velocity).acc
+    local speedComponent = entity:getComponent(ComponentTypes.Speed)
 
     if love.keyboard.isDown("left") then
       acc.x = -70
@@ -25,11 +30,11 @@ function PlayerControlSystem:update()
     end
 
     if love.keyboard.isDown("up") then
-      acc.y = -30
+      speedComponent.speed = speedComponent.speed + 0.01
     end
 
     if love.keyboard.isDown("down") then
-      acc.y = 30
+      speedComponent.speed = speedComponent.speed - 0.02
     end
   end
 end
