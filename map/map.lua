@@ -11,7 +11,7 @@ function TrackSegment:new(segment, trackOffset)
   self = setmetatable({}, TrackSegment)
 
   self.segment = segment
-  self.trackOffset = trackOffset
+  self.trackOffset = trackOffset or 0
 
   return self
 end
@@ -29,7 +29,7 @@ end
 function Map:new(sprite)
   self = setmetatable({}, Map)
 
-  self.trackOffset = 1
+  self.trackOffset = 4
   self.offsetY = 0
   self.prevGeneratedSegment = nil
 
@@ -48,33 +48,32 @@ function Map:new(sprite)
   }
 
   self.segments = {
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0),
-    TrackSegment:new(self.road, 0)
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset),
+    TrackSegment:new(self.road, self.trackOffset)
   }
 
   return self
 end
 
 function Map:draw()
-  -- local offset = 32
   local segmentHeight = 32
   local drawXOffset = self.trackOffset
 
@@ -92,31 +91,10 @@ function Map:draw()
       drawXOffset = drawXOffset + 1
     end
   end
-
-  -- love.graphics.draw(self.sprite, self.road, 0, 1 * offset);
-  -- love.graphics.draw(self.sprite, self.road, 0, 2 * offset);
-  -- love.graphics.draw(self.sprite, self.road, 0, 3 * offset);
-  -- love.graphics.draw(self.sprite, self.road, 0, 4 * offset);
-
-  -- love.graphics.draw(self.sprite, self.roadLeft, 0, 5 * offset);
-  -- self.offsetY = self.offsetY + 1
-
-  -- love.graphics.draw(self.sprite, self.roadLeft, self.offsetY * 16, 6 * offset);
-  -- self.offsetY = self.offsetY + 1
-
-  -- love.graphics.draw(self.sprite, self.road, self.offsetY * 16, 7 * offset);
-
-  -- self.offsetY = self.offsetY - 1
-  -- love.graphics.draw(self.sprite, self.roadRight, self.offsetY * 16, 8 * offset);
-
-  -- self.offsetY = self.offsetY - 1
-  -- love.graphics.draw(self.sprite, self.roadRight, self.offsetY * 16, 9 * offset);
-
-  -- love.graphics.draw(self.sprite, self.road, self.offsetY * 16, 10 * offset);
 end
 
 function Map:update(dt)
-  self.offsetY = self.offsetY + 3
+  self.offsetY = self.offsetY + 1
 
   if self.offsetY > 32 then
     self.offsetY = 0

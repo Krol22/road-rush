@@ -6,13 +6,18 @@ local PositionComponent = require("components/PositionComponent")
 local DrawComponent = require("components/DrawComponent")
 local PlayerComponent = require("components/PlayerComponent")
 local VelocityComponent = require("components/VelocityComponent")
+local SpawnerComponent = require("components/SpawnerComponent")
 
 local DrawSystem = require("systems/DrawSystem")
 local MovementSystem = require("systems/MovementSystem")
 local PlayerControlSystem = require("systems/PlayerControlSystem")
+local SpawnerSystem = require("systems/SpawnerSystem")
+
+local SpawnCarHandler = require("commands/spawnCarHandler")
 
 local SpriteQuads = require("constants/spriteQuads")
 local ComponentTypes = require("constants/componentTypes")
+local CarTypes = require("constants/carTypes")
 
 PlayScene = {}
 PlayScene.__index = PlayScene
@@ -36,12 +41,12 @@ function PlayScene:new()
 
   entity1:addComponent(ComponentTypes.Draw, DrawComponent:new(
     sprite,
-    SpriteQuads.RedCar_1:toLoveQuad(sprite)
+    SpriteQuads.RedCar1:toLoveQuad(sprite)
   ));
 
   entity2:addComponent(ComponentTypes.Draw, DrawComponent:new(
     sprite,
-    SpriteQuads.YellowCar_2:toLoveQuad(sprite)
+    SpriteQuads.YellowCar2:toLoveQuad(sprite)
   ));
 
   playerEntity:addComponent(ComponentTypes.Player, playerComponent)
@@ -55,17 +60,27 @@ function PlayScene:new()
   entity1:addComponent(ComponentTypes.Position, positionComponent1)
   entity2:addComponent(ComponentTypes.Position, positionComponent2)
 
+  local spawner = Entity:new()
+  spawner:addComponent(ComponentTypes.Spawner, SpawnerComponent:new(
+    CarTypes.RedCar1
+  ))
+
   self.ecs:addEntity(entity1)
   self.ecs:addEntity(entity2)
   self.ecs:addEntity(playerEntity)
+  self.ecs:addEntity(spawner)
+
+  self.ecs:registerHandler("SpawnCarCommand", SpawnCarHandler:new())
 
   local drawSystem = DrawSystem:new()
   local playerControlSystem = PlayerControlSystem:new()
   local movementSystem = MovementSystem:new()
+  local spawnerSystem = SpawnerSystem:new()
 
   self.ecs:addSystem(drawSystem)
   self.ecs:addSystem(movementSystem)
   self.ecs:addSystem(playerControlSystem)
+  self.ecs:addSystem(spawnerSystem)
 
   return self
 end

@@ -4,6 +4,7 @@ Entity.__index = Entity
 function Entity:new()
   self = setmetatable({}, Entity)
 
+  self.markedToRemove = false
   self.components = {}
 
   return self
@@ -24,6 +25,10 @@ function Entity:hasComponents(componentTypes)
         end
     end
     return true
+end
+
+function Entity:remove()
+    self.markedToRemove = true
 end
 
 return Entity

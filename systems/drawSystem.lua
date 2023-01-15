@@ -8,7 +8,7 @@ function DrawSystem:new()
   self = setmetatable({}, DrawSystem)
 
   self.entitiesMetadata = {}
-  self.entitiesMetadata["entities"] = {ComponentTypes.Draw}
+  self.entitiesMetadata["entities"] = {ComponentTypes.Draw, ComponentTypes.Position}
   self.entitiesMetadata["playerEntities"] = {ComponentTypes.Player}
 
   return self
@@ -18,6 +18,7 @@ function DrawSystem:draw()
   for entity, _ in pairs(self.entities) do
     local drawComponent = entity:getComponent(ComponentTypes.Draw)
     local positionComponent = entity:getComponent(ComponentTypes.Position)
+
     love.graphics.draw(
       drawComponent.sprite,
       drawComponent.quad,

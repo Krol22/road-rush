@@ -7,6 +7,9 @@ function ECS:new()
   self.systems = {}
   self.entities = {}
 
+  self.handlers = {}
+  self.commandsToDispatch = {}
+
   return self
 end
 
@@ -23,7 +26,15 @@ function ECS:update(dt)
     self:injectEntities(system)
     local mt = getmetatable(system)
     if mt.__index.update then
-      system:update(dt)
+      system:update(dt, self)
+    end
+  end
+
+  self:commit()
+
+  for index, entity in ipairs(self.entities) do
+    if entity.markedToRemove then
+      table.remove(self.entities, index)
     end
   end
 end
@@ -54,6 +65,37 @@ function ECS:injectEntities(system)
     local entities = self:getEntities(components)
     system[prop] = entities
   end
+end
+
+function ECS:dispatch(command)
+  table.insert(self.commandsToDispatch, command)
+end
+
+function ECS:registerHandler(commandName, commandHandler)
+  if self.handlers[commandName] == nil then
+    self.handlers[commandName] = {}
+  end
+
+  table.insert(self.handlers[commandName], commandHandler)
+end
+
+function ECS:commit()
+  for _, command in ipairs(self.commandsToDispatch) do
+    local commandName = command.name
+    local handlers = self.handlers[commandName]
+
+    if #handlers == 0 then
+      goto continue
+    end
+
+    for _, handler in ipairs(handlers) do
+      handler:handle(command, self)
+    end
+
+    ::continue::
+  end
+
+  self.commandsToDispatch = {}
 end
 
 return ECS

@@ -2,7 +2,8 @@ ComponentTypes = {
   ["Draw"] = "DRAW",
   ["Position"] = "POSITION",
   ["Player"] = "PLAYER",
-  ["Velocity"] = "VELOCITY"
+  ["Velocity"] = "VELOCITY",
+  ["Spawner"] = "SPAWNER"
 }
 
 return ComponentTypes
