@@ -1,4 +1,4 @@
-local Quad = require("math/quad")
+local Quad = require("src/math/quad")
 
 SpriteQuads = {
   ["Car"] = Quad:new(3, 3, 10, 15),

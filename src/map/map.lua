@@ -1,6 +1,6 @@
-local SpriteQuads = require("constants/spriteQuads")
-local ComponentTypes = require("constants/componentTypes")
-local Reversedipairs = require("utils/reversedipairs")
+local SpriteQuads = require("src/constants/spriteQuads")
+local ComponentTypes = require("src/constants/componentTypes")
+local Reversedipairs = require("src/utils/reversedipairs")
 
 Map = {}
 Map.__index = Map
@@ -29,7 +29,7 @@ end
 function Map:new(sprite)
   self = setmetatable({}, Map)
 
-  self.trackOffset = 4
+  self.trackOffset = 2
   self.offsetY = 0
   self.speed = 0
   self.prevGeneratedSegment = nil
@@ -85,7 +85,7 @@ function Map:draw()
 
     segment:draw(
       self.sprite,
-      (index - 1) * segmentHeight + self.offsetY
+      math.floor((index - 1) * segmentHeight + self.offsetY)
     )
 
     if segment == self.roadRight then
@@ -94,9 +94,9 @@ function Map:draw()
   end
 end
 
-function Map:update(_, playerEntity)
+function Map:update(dt, playerEntity)
   local speedComponent = playerEntity:getComponent(ComponentTypes.Speed)
-  self.offsetY = self.offsetY + speedComponent.speed
+  self.offsetY = self.offsetY + speedComponent.speed * 1000 * dt
 
   if self.offsetY > 32 then
     self.offsetY = 0

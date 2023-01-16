@@ -1,7 +1,9 @@
-local Game = require("engine/game")
-local PlayScene = require("scenes/playScene")
+local Game = require("src/engine/game")
+local PlayScene = require("src/scenes/playScene")
 
 local game
+
+math.randomseed(os.time())
 
 function love.load()
   love.window.setTitle("Road")

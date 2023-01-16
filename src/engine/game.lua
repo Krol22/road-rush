@@ -1,4 +1,4 @@
-local Scenes = require("engine/scenes")
+local Scenes = require("src/engine/scenes")
 
 Game = {}
 Game.__index = Game

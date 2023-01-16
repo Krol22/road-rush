@@ -1,6 +1,6 @@
-local ComponentTypes = require("constants/componentTypes")
-local CarTypes = require("constants/carTypes")
-local SpawnCarCommand = require("commands/spawnCarCommand")
+local ComponentTypes = require("src/constants/componentTypes")
+local CarTypes = require("src/constants/carTypes")
+local SpawnCarCommand = require("src/commands/spawnCarCommand")
 
 SpawnerSystem = {}
 SpawnerSystem.__index = SpawnerSystem

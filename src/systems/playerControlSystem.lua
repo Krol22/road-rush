@@ -1,4 +1,4 @@
-local ComponentTypes = require("constants/componentTypes")
+local ComponentTypes = require("src/constants/componentTypes")
 
 PlayerControlSystem = {}
 PlayerControlSystem.__index = PlayerControlSystem

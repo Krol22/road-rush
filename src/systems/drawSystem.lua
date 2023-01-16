@@ -1,4 +1,4 @@
-local ComponentTypes = require("constants/componentTypes")
+local ComponentTypes = require("src/constants/componentTypes")
 
 DrawSystem = {}
 DrawSystem.__index = DrawSystem

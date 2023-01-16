@@ -1,4 +1,4 @@
-local ComponentTypes = require("constants/componentTypes")
+local ComponentTypes = require("src/constants/componentTypes")
 
 SpawnerComponent = {}
 SpawnerComponent.__index = SpawnerComponent

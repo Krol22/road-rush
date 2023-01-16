@@ -1,10 +1,10 @@
-local Entity = require("engine/entity")
+local Entity = require("src/engine/entity")
 
-local ComponentTypes = require("constants/componentTypes")
-local SpriteQuads = require("constants/spriteQuads")
+local ComponentTypes = require("src/constants/componentTypes")
+local SpriteQuads = require("src/constants/spriteQuads")
 
-local PositionComponent = require("components/PositionComponent")
-local DrawComponent = require("components/DrawComponent")
+local PositionComponent = require("src/components/PositionComponent")
+local DrawComponent = require("src/components/DrawComponent")
 
 local sprite = love.graphics.newImage("assets/sprite.png");
 

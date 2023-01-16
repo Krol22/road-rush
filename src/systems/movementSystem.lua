@@ -1,4 +1,4 @@
-local ComponentTypes = require("constants/componentTypes")
+local ComponentTypes = require("src/constants/componentTypes")
 
 MovementSystem = {}
 MovementSystem.__index = MovementSystem

@@ -1,25 +1,25 @@
-local Entity = require("engine/entity")
-local ECS = require("engine/ecs")
-local Map = require("map/map")
+local Entity = require("src/engine/entity")
+local ECS = require("src/engine/ecs")
+local Map = require("src/map/map")
 
-local PositionComponent = require("components/PositionComponent")
-local DrawComponent = require("components/DrawComponent")
-local PlayerComponent = require("components/PlayerComponent")
-local VelocityComponent = require("components/VelocityComponent")
-local SpawnerComponent = require("components/SpawnerComponent")
-local SpeedComponent = require("components/SpeedComponent")
+local PositionComponent = require("src/components/PositionComponent")
+local DrawComponent = require("src/components/DrawComponent")
+local PlayerComponent = require("src/components/PlayerComponent")
+local VelocityComponent = require("src/components/VelocityComponent")
+local SpawnerComponent = require("src/components/SpawnerComponent")
+local SpeedComponent = require("src/components/SpeedComponent")
 
-local DrawSystem = require("systems/DrawSystem")
-local MovementSystem = require("systems/MovementSystem")
-local PlayerControlSystem = require("systems/PlayerControlSystem")
-local SpawnerSystem = require("systems/SpawnerSystem")
-local MaxSpeedSystem = require("systems/MaxSpeedSystem")
+local DrawSystem = require("src/systems/DrawSystem")
+local MovementSystem = require("src/systems/MovementSystem")
+local PlayerControlSystem = require("src/systems/PlayerControlSystem")
+local SpawnerSystem = require("src/systems/SpawnerSystem")
+local MaxSpeedSystem = require("src/systems/MaxSpeedSystem")
 
-local SpawnCarHandler = require("commands/spawnCarHandler")
+local SpawnCarHandler = require("src/commands/spawnCarHandler")
 
-local SpriteQuads = require("constants/spriteQuads")
-local ComponentTypes = require("constants/componentTypes")
-local CarTypes = require("constants/carTypes")
+local SpriteQuads = require("src/constants/spriteQuads")
+local ComponentTypes = require("src/constants/componentTypes")
+local CarTypes = require("src/constants/carTypes")
 
 PlayScene = {}
 PlayScene.__index = PlayScene

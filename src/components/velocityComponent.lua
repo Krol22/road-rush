@@ -1,4 +1,4 @@
-local Vector2D = require('math/vector2d')
+local Vector2D = require('src/math/vector2d')
 
 VelocityComponent = {}
 VelocityComponent.__index = VelocityComponent
